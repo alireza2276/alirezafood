@@ -6,7 +6,7 @@ from .models import Product, Category
 
 
 class ProductList(ListView):
-    model = Product
+    queryset = Product.objects.order_by('title').exclude(category__title__icontains='نوشیدنی')
     template_name = 'product_list.html'
     context_object_name = 'products'
     paginate_by = 6

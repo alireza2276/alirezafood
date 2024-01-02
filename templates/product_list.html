@@ -30,7 +30,14 @@
               </div>
               <h3>{{ product.title }}</h3>
               <p class="product-price">{{ product.price }}$</p>
-              <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+              <div class="single-product-form">
+                <form action="{% url 'cart_add' product.id %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" id="qty"  name="quantity" value="1" min="1" />
+
+                  <button class="btn btn-danger" type="submit">Add to cart</button>
+                </form>
+              </div>
             </div>
           </div>
         {% endfor %}
