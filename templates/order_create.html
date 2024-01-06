@@ -5,6 +5,20 @@
 {% endblock %}
 
 {% block content %}
+  <!-- breadcrumb-section -->
+  <div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2 text-center">
+          <div class="breadcrumb-text">
+            <p>Fresh and Organic</p>
+            <h1>Check Out Product</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end breadcrumb section -->
   <!-- check out section -->
   <div class="checkout-section mt-150 mb-150">
     <div class="container">
@@ -20,22 +34,25 @@
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                   <div class="card-body">
                     <div class="billing-address-form">
-                      <form action="index.html">
+                      <form action="" method="post">
+                        {% csrf_token %}
                         <p>
-                          <input type="text" placeholder="Name" />
+                          <input type="text" placeholder="Name" name="full_name" />
                         </p>
                         <p>
-                          <input type="email" placeholder="Email" />
+                          <input type="email" placeholder="Email" name="email" />
                         </p>
                         <p>
-                          <input type="text" placeholder="Address" />
+                          <input type="text" placeholder="Address" name="address" />
                         </p>
                         <p>
-                          <input type="tel" placeholder="Phone" />
+                          <input type="tel" placeholder="Phone" name="phone_number" />
                         </p>
                         <p>
-                          <textarea name="bill" id="bill" cols="30" rows="10" placeholder="Say Something"></textarea>
+                          <textarea name="order_notes" id="bill" cols="30" rows="10" placeholder="Say Something"></textarea>
                         </p>
+                        <br />
+                        <button class="btn btn-danger" type="submit">Place Order</button>
                       </form>
                     </div>
                   </div>
@@ -72,46 +89,27 @@
         <div class="col-lg-4">
           <div class="order-details-wrap">
             <table class="order-details">
-              <thead>
-                <tr>
-                  <th>Your order Details</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
               <tbody class="order-details-body">
                 <tr>
                   <td>Product</td>
-                  <td>Total</td>
+                  <td>Quantity</td>
+                  <td>Price</td>
                 </tr>
-                <tr>
-                  <td>Strawberry</td>
-                  <td>$85.00</td>
-                </tr>
-                <tr>
-                  <td>Berry</td>
-                  <td>$70.00</td>
-                </tr>
-                <tr>
-                  <td>Lemon</td>
-                  <td>$35.00</td>
-                </tr>
+                {% for item in cart %}
+                  <tr>
+                    <td>{{ item.product_obj.title }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.total_price }}</td>
+                  </tr>
+                {% endfor %}
               </tbody>
               <tbody class="checkout-details">
                 <tr>
-                  <td>Subtotal</td>
-                  <td>$190</td>
-                </tr>
-                <tr>
-                  <td>Shipping</td>
-                  <td>$50</td>
-                </tr>
-                <tr>
-                  <td>Total</td>
-                  <td>$240</td>
+                  <td>Total Price</td>
+                  <td>${{ cart.get_total_price }}</td>
                 </tr>
               </tbody>
             </table>
-            <a href="#" class="boxed-btn">Place Order</a>
           </div>
         </div>
       </div>

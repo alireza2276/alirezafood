@@ -6,6 +6,27 @@
 {% endblock %}
 
 {% block content %}
+  <!-- breadcrumb-section -->
+  <div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2 text-center">
+          <div class="breadcrumb-text">
+            <p>Fresh and Organic</p>
+            <h1>Cart</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end breadcrumb section -->
+  {% if messages %}
+    <div class="container">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
   <!-- cart -->
   <div class="cart-section mt-150 mb-150">
     <div class="container">
@@ -52,9 +73,7 @@
               </table>
             </div>
           {% else %}
-            <p>
-              Cart is Empty! Please add to cart some products.
-            </p>
+            <p>Cart is Empty! Please add to cart some products.</p>
             <a href="{% url 'product_list' %}">Go shopping</a>
           {% endif %}
         </div>
@@ -69,18 +88,6 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="total-data">
-                  <td>
-                    <strong>Subtotal:</strong>
-                  </td>
-                  <td>$500</td>
-                </tr>
-                <tr class="total-data">
-                  <td>
-                    <strong>Shipping:</strong>
-                  </td>
-                  <td>$45</td>
-                </tr>
                 <tr class="total-data">
                   <td>
                     <strong>Total:</strong>
@@ -98,14 +105,7 @@
           <div class="coupon-section">
             <h3>Apply Coupon</h3>
             <div class="coupon-form-wrap">
-              <form action="index.html">
-                <p>
-                  <input type="text" placeholder="Coupon" />
-                </p>
-                <p>
-                  <input type="submit" value="Apply" />
-                </p>
-              </form>
+              <a class="btn btn-primary" href="{% url 'order_create' %}">Checkout</a>
             </div>
           </div>
         </div>

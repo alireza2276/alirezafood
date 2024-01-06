@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .cart import Cart
-from store.models import Product, OrderItem
+from store.models import Product, OrderItem, Order
 from .forms import AddToCartProductForm, OrderForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def cart_detail_view(request):
@@ -51,7 +52,7 @@ def cart_clear(request):
 
     return redirect('product_list')
 
-
+@login_required
 def order_create(request):
     order_form = OrderForm()
     cart = Cart(request)
@@ -61,23 +62,25 @@ def order_create(request):
         return redirect('product_list')
     if request.method == 'POST':
 
-        order_form = OrderForm(request.POST)
+        order_form = OrderForm(request.POST, )
         if order_form.is_valid():
             order_obj = order_form.save(commit=False)
-            order_obj.user = request.user
+            order_obj.user = user=request.user
             order_obj.save()
 
 
         for item in cart:
             product = item['product_obj']
             OrderItem.objects.create(
-                order = order_obj,
+                    order = order_obj,
                     product = product,
                     quantity = item['quantity'],
                     price = product.price,
                 )
             
         cart.clear()
+
+        messages.success(request, 'Your orders has successfully placed.')
 
 
     return render(request, 'order_create.html', context={

@@ -6,6 +6,20 @@
 {% endblock %}
 
 {% block content %}
+  <!-- breadcrumb-section -->
+  <div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2 text-center">
+          <div class="breadcrumb-text">
+            <p>Fresh and Organic</p>
+            <h1>Shop</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end breadcrumb section -->
   <!-- products -->
   <div class="product-section mt-150 mb-150">
     <div class="container">
@@ -33,10 +47,11 @@
               <div class="single-product-form">
                 <form action="{% url 'cart_add' product.id %}" method="post">
                   {% csrf_token %}
-                  <input type="hidden" id="qty"  name="quantity" value="1" min="1" />
+                  <input type="hidden" id="qty" name="quantity" value="1" min="1" />
 
                   <button class="btn btn-danger" type="submit">Add to cart</button>
                 </form>
+                <img height="30px;" src="{% static 'img/like.png' %}" alt="" /><small>{{product.likes_count}}</small>
               </div>
             </div>
           </div>

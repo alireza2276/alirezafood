@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category, Customer, Order, OrderItem
+from .models import Product, Category, Order, OrderItem
 
 
 @admin.register(Product)
@@ -12,9 +12,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title']
 
 
-@admin.register(Customer)
-class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['user', 'phone_number', 'birth_date']
+
 
 
 class OrderItemTabularInline(admin.TabularInline):
@@ -25,7 +23,7 @@ class OrderItemTabularInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['customer', 'full_name', 'datetime_created', 'status', 'address', 'phone_number']
+    list_display = ['user', 'full_name', 'datetime_created', 'status', 'address', 'phone_number']
     inlines = [OrderItemTabularInline]
 
 
