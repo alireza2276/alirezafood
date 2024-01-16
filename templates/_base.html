@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -53,13 +53,13 @@
               <nav class="main-menu">
                 <ul>
                   <li class="{% if request.resolver_match.url_name == 'home' %}current-list-item{% endif %}">
-                    <a href="{% url "home" %}">Home</a>
+                    <a href="{% url "home" %}">{% trans "Home" %}</a>
                   </li>
 
                   <li class="{% if request.resolver_match.url_name == 'product_list' %}current-list-item{% endif %}">
-                    <a href="{% url "product_list" %}">Products</a>
+                    <a href="{% url "product_list" %}">{% trans "Products" %}</a>
                   </li>
-                  <li><a href="#">Categories</a>
+                  <li><a href="#">{% trans "Categories" %}</a>
                     <ul class="sub-menu">
                       {% for cat in category %}
                         <li><a href="{% url "category" cat.id %}">{{cat.title}}</a></li>
@@ -69,7 +69,7 @@
                   </li>
 
                   <li  class="{% if request.resolver_match.url_name == 'contact' %}current-list-item{% endif %}">
-                    <a href="{% url "contact" %}">Contact</a>
+                    <a href="{% url "contact" %}">{% trans "Contact" %}</a>
                   </li>
 
                   <li>
@@ -77,7 +77,7 @@
                       <a class="shopping-cart" href="{% url 'cart_detail' %}"><i class="fas fa-shopping-cart"></i></a>
                       <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
                       {% if user.is_authenticated %}
-                        <a class="btn btn-warning" href="{% url 'account_logout' %}">Logout</a>
+                        <a class="btn btn-warning" href="{% url 'account_logout' %}">{% trans "Logout" %}</a>
                       {% else %}
                         <a href="{% url 'account_login' %}"><img src="{% static 'img/login.png' %}" alt="" /></a>
                       {% endif %}
@@ -105,7 +105,7 @@
               <div class="search-bar-tablecell">
                 <h3>Search For:</h3>
                 <input type="text" placeholder="Keywords" />
-                <button type="submit">Search <i class="fas fa-search"></i></button>
+                <button type="submit">{% trans "Search" %} <i class="fas fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -143,22 +143,22 @@
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="footer-box pages">
-              <h2 class="widget-title">Pages</h2>
+              <h2 class="widget-title">{% trans "Pages" %}</h2>
               <ul>
                 <li>
-                  <a href="index.html">Home</a>
+                  <a href="index.html">{% trans "Home" %}</a>
                 </li>
                 <li>
-                  <a href="about.html">About</a>
+                  <a href="about.html">{% trans "About" %}</a>
                 </li>
                 <li>
-                  <a href="services.html">Shop</a>
+                  <a href="services.html">{% trans "products" %}</a>
                 </li>
                 <li>
-                  <a href="news.html">News</a>
+                  <a href="news.html">{% trans "News" %}</a>
                 </li>
                 <li>
-                  <a href="contact.html">Contact</a>
+                  <a href="contact.html">{% trans "Contact" %}</a>
                 </li>
               </ul>
             </div>

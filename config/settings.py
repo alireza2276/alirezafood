@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.contrib.humanize',
+
     #third party
     "debug_toolbar",
     'crispy_forms',
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
     'store',
     'cart',
     'coupons',
+    'persian_translate',
 ]
 
 SITE_ID = 1
@@ -139,12 +142,17 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa-ir'
 
-TIME_ZONE = 'UTC'
+
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
+
+
 
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
 
@@ -174,3 +182,16 @@ LOGOUT_REDIRECT_URL = 'home'
 
 #crispy_forms_settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+#tranlate settings
+
+LANGUAGES = (
+    ('en', 'English'),
+    ('fa', 'Persian'),
+)
+
+
+LOCALE_PATHS = [
+    os.path.join(str(BASE_DIR.joinpath('templates')), 'locale')
+]

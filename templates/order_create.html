@@ -1,7 +1,13 @@
 {% extends '_base.html' %}
 {% load static %}
+{% load i18n %}
+{% load persian_template_tags %}
+{% load humanize %}
+
+
+
 {% block title %}
-  Check Out
+  {% trans "Check Out" %}
 {% endblock %}
 
 {% block content %}
@@ -11,8 +17,7 @@
       <div class="row">
         <div class="col-lg-8 offset-lg-2 text-center">
           <div class="breadcrumb-text">
-            <p>Fresh and Organic</p>
-            <h1>Check Out Product</h1>
+            <h1>{% trans "Check Out" %}</h1>
           </div>
         </div>
       </div>
@@ -52,7 +57,7 @@
                           <textarea name="order_notes" id="bill" cols="30" rows="10" placeholder="Say Something"></textarea>
                         </p>
                         <br />
-                        <button class="btn btn-danger" type="submit">Place Order</button>
+                        <button class="btn btn-danger" type="submit">{% trans "Place Order" %}</button>
                       </form>
                     </div>
                   </div>
@@ -91,22 +96,22 @@
             <table class="order-details">
               <tbody class="order-details-body">
                 <tr>
-                  <td>Product</td>
-                  <td>Quantity</td>
-                  <td>Price</td>
+                  <td>{% trans "Product" %}</td>
+                  <td>{% trans "Quantity" %}</td>
+                  <td>{% trans "Price" %}</td>
                 </tr>
                 {% for item in cart %}
                   <tr>
                     <td>{{ item.product_obj.title }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>${{ item.total_price }}</td>
+                    <td>{{ item.quantity|translate_number }}</td>
+                    <td>${{ item.total_price|intcomma:False|translate_number }}</td>
                   </tr>
                 {% endfor %}
               </tbody>
               <tbody class="checkout-details">
                 <tr>
-                  <td>Total Price</td>
-                  <td>${{ cart.get_total_price }}</td>
+                  <td>{% trans "Total Price" %}</td>
+                  <td>{% trans "$" %}{{ cart.get_total_price|intcomma:False|translate_number }}</td>
                 </tr>
               </tbody>
             </table>

@@ -1,8 +1,12 @@
 {% extends '_base.html' %}
 {% load static %}
+{% load i18n %}
+{% load persian_template_tags %}
+{% load humanize %}
+
 
 {% block title %}
-  Cart
+  {% trans "Cart" %}
 {% endblock %}
 
 {% block content %}
@@ -12,8 +16,7 @@
       <div class="row">
         <div class="col-lg-8 offset-lg-2 text-center">
           <div class="breadcrumb-text">
-            <p>Fresh and Organic</p>
-            <h1>Cart</h1>
+            <h1>{% trans "Cart" %}</h1>
           </div>
         </div>
       </div>
@@ -38,11 +41,11 @@
                 <thead class="cart-table-head">
                   <tr class="table-head-row">
                     <th class="product-remove"></th>
-                    <th class="product-image">Product Image</th>
-                    <th class="product-name">Name</th>
-                    <th class="product-price">Price</th>
-                    <th class="product-quantity">Quantity</th>
-                    <th class="product-total">Total</th>
+                    <th class="product-image">{% trans "Product Image" %}</th>
+                    <th class="product-name">{% trans "Name" %}</th>
+                    <th class="product-price">{% trans "Price" %}</th>
+                    <th class="product-quantity">{% trans "Quantity" %}</th>
+                    <th class="product-total">{% trans "Total" %}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -55,7 +58,7 @@
                         <img src="{{ item.product_obj.image.url }}" alt="" />
                       </td>
                       <td class="product-name">{{ item.product_obj.title }}</td>
-                      <td class="product-price">${{ item.product_obj.price }}</td>
+                      <td class="product-price">{% trans "$" %}{{ item.product_obj.price|intcomma:False|translate_number }}</td>
                       <td class="product-quantity">
                         <form class="d-flex" action="{% url 'cart_add' item.product_obj.id %}" method="POST">
                           {% csrf_token %}
@@ -63,18 +66,18 @@
                             <input type="number" class="quantity-input" name="quantity" id="qty-1" value="{{ item.quantity }}" min="1" />
                           </div>
                           {{ item.product_update_quantity_form.inplace }}
-                          <button class="small" type="submit">Refresh</button>
+                          <button class="small" type="submit">{% trans "Refresh" %}</button>
                         </form>
                       </td>
-                      <td class="product-total">{{ item.total_price }}</td>
+                      <td class="product-total">{{ item.total_price|intcomma:False|translate_number }}</td>
                     </tr>
                   {% endfor %}
                 </tbody>
               </table>
             </div>
           {% else %}
-            <p>Cart is Empty! Please add to cart some products.</p>
-            <a href="{% url 'product_list' %}">Go shopping</a>
+            <p>{% trans "Cart is Empty! Please add to cart some products" %}.</p>
+            <a href="{% url 'product_list' %}">{% trans "Go shopping" %}</a>
           {% endif %}
         </div>
 
@@ -83,26 +86,26 @@
             <table class="total-table">
               <thead class="total-table-head">
                 <tr class="table-total-row">
-                  <th>Total</th>
-                  <th>Price</th>
+                  <th>{% trans "Total" %}</th>
+                  <th>{% trans "Price" %}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="total-data">
                   {% if cart.coupon %}
                     <td>
-                      <strong>Total:</strong>
+                      <strong>{% trans "Total" %}:</strong>
                     </td>
-                    <td>{{ cart.get_total_price }}</td>
+                    <td>{{ cart.get_total_price|intcomma:False|translate_number }}</td>
                     <td>
-                      <strong>Total with coupon</strong>
+                      <strong>{% trans "Total with coupon" %}</strong>
                     </td>
-                    <td>{{ cart.get_total_price_after_discount }}</td>
+                    <td>{{ cart.get_total_price_after_discount|intcomma:False|translate_number }}</td>
                   {% else %}
                     <td>
-                      <strong>Total:</strong>
+                      <strong>{% trans "Total" %}:</strong>
                     </td>
-                    <td>{{ cart.get_total_price }}</td>
+                    <td>{{ cart.get_total_price|intcomma:False|translate_number }}</td>
                   {% endif %}
                 </tr>
               </tbody>
@@ -110,7 +113,7 @@
           </div>
 
           <div class="coupon-section">
-            <h3>Apply Coupon</h3>
+            <h3>{% trans "Apply Coupon" %}</h3>
             <form action="{% url 'apply' %}" method="post">
               {% csrf_token %}
               {{ coupon_apply_form }}
@@ -118,7 +121,7 @@
             </form>
             <br>
             <div class="coupon-form-wrap">
-              <a class="btn btn-primary" href="{% url 'order_create' %}">Checkout</a>
+              <a class="btn btn-primary" href="{% url 'order_create' %}">{% trans "Checkout" %}</a>
             </div>
           </div>
         </div>

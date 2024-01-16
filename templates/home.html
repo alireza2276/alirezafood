@@ -1,8 +1,11 @@
 {% extends '_base.html' %}
 {% load static %}
+{% load i18n %}
+{% load persian_template_tags %}
+{% load humanize %}
 
 {% block title %}
-  Home
+  {% trans "Home" %}
 {% endblock %}
 
 {% block content %}
@@ -96,8 +99,8 @@
                 <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt="" /></a>
               </div>
               <h3>{{ product.title }}</h3>
-              <p class="product-price">{{ product.price }}$</p>
-              <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+              <p class="product-price">{{ product.price|intcomma:False|translate_number }}{% trans "$" %}</p>
+              <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> {% trans "Add to Cart" %}</a>
             </div>
           </div>
         {% endfor %}
