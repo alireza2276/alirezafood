@@ -4,7 +4,7 @@ from store.models import Product, OrderItem, Order
 from .forms import AddToCartProductForm, OrderForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from coupons.forms import CouponApplyForm
 
 def cart_detail_view(request):
     cart = Cart(request)
@@ -14,8 +14,10 @@ def cart_detail_view(request):
             'quantity': item['quantity'],
             'inplace': True,
         })
+    
+    coupon_apply_form = CouponApplyForm()
 
-    return render(request, 'cart_detail.html', {'cart': cart})
+    return render(request, 'cart_detail.html', {'cart': cart, 'coupon_apply_form': coupon_apply_form})
 
 
 def add_to_cart_view(request, product_id):

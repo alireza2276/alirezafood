@@ -98,10 +98,6 @@
               <h3>{{ product.title }}</h3>
               <p class="product-price">{{ product.price }}$</p>
               <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-              <br />
-             
-                <img height="30px;" src="{% static 'img/like.png' %}" alt="" /><small>{{product.likes_count}}</small>
-              
             </div>
           </div>
         {% endfor %}

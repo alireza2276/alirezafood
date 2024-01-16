@@ -89,21 +89,34 @@
               </thead>
               <tbody>
                 <tr class="total-data">
-                  <td>
-                    <strong>Total:</strong>
-                  </td>
-                  <td>{{ cart.get_total_price }}</td>
+                  {% if cart.coupon %}
+                    <td>
+                      <strong>Total:</strong>
+                    </td>
+                    <td>{{ cart.get_total_price }}</td>
+                    <td>
+                      <strong>Total with coupon</strong>
+                    </td>
+                    <td>{{ cart.get_total_price_after_discount }}</td>
+                  {% else %}
+                    <td>
+                      <strong>Total:</strong>
+                    </td>
+                    <td>{{ cart.get_total_price }}</td>
+                  {% endif %}
                 </tr>
               </tbody>
             </table>
-            <div class="cart-buttons">
-              <a href="cart.html" class="boxed-btn">Update Cart</a>
-              <a href="checkout.html" class="boxed-btn black">Check Out</a>
-            </div>
           </div>
 
           <div class="coupon-section">
             <h3>Apply Coupon</h3>
+            <form action="{% url 'apply' %}" method="post">
+              {% csrf_token %}
+              {{ coupon_apply_form }}
+              <input type="submit" value="apply" />
+            </form>
+            <br>
             <div class="coupon-form-wrap">
               <a class="btn btn-primary" href="{% url 'order_create' %}">Checkout</a>
             </div>
