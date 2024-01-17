@@ -98,31 +98,69 @@
   <div class="col-lg-8">
     <!-- Comment List -->
     <div class="mb-5">
-      <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">{{product.comments.count}} Comments</h3>
+      <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">{{ product.comments.count }} Comments</h3>
       {% for comment in product.comments.all %}
         <div class="media mb-4">
           <img src="img/user.jpg" alt="Image" class="img-fluid rounded-circle mr-3 mt-1" style="width: 45px;" />
           <div class="media-body">
-            <h6>{{comment.user}} <small><i>{{comment.datetime_created}}</i></small></h6>
-            <p>{{comment.body}}</p>
-            
+            <h6>{{ comment.user }} <small><i>{{ comment.datetime_created }}</i></small></h6>
+            <p>{{ comment.body }}</p>
+            {% if comment.rate > 0 %}
+            <i class="fa fa-star {% if comment.rate  < 1 %} no-checked {% else %} checked {% endif %} " id="check-star"></i>
+            <i class="fa fa-star {% if comment.rate  < 2 %} no-checked {% else %} checked {% endif %} " id="check-star"></i>
+            <i class="fa fa-star {% if comment.rate  < 3 %} no-checked {% else %} checked {% endif %} " id="check-star"></i>
+            <i class="fa fa-star {% if comment.rate  < 4 %} no-checked {% else %} checked {% endif %} " id="check-star"></i>
+            <i class="fa fa-star {% if comment.rate  < 5 %} no-checked {% else %} checked {% endif %} " id="check-star"></i>
+          <hr>
+          {% else %}
+
+           <i class="fa fa-star " id="star"></i>
+           <i class="fa fa-star" id="star"></i>
+           <i class="fa fa-star" id="star"></i>
+           <i class="fa fa-star" id="star"></i>
+           <i class="fa fa-star" id="star"></i>
+                  &nbsp;<span>No ratings</span>
+
+          <hr>
+
+          {% endif %}
           </div>
         </div>
       {% endfor %}
     </div>
     <!-- Comment Form -->
     {% if user.is_authenticated %}
-      <div class="bg-secondary rounded p-5">
-        <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">Leave a comment</h3>
+      <div  class="col-md-6">
+        <p style="font-weight:600;">Write a review</p>
         <form method="post" action="{% url 'comment_create' product.id %}">
-          {% csrf_token %}
+          {% csrf_token %} <div class="form-group required">
+            <div class="form-group required">
+              <div class="fa fa-star">
+                <p>Your Rating:</p>
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+                <input type="radio" id="star1" name="rate" value="1" />
+                <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+              </div>
+            </div>
+          
           <div class="form-group">
-            <label for="message">Message *</label>
-            <textarea name="body" id="message" cols="30" rows="5" class="form-control border-0"></textarea>
+            
+            <textarea name="body"  placeholder="write a review" rows="6" cols="50" id="review-text" required></textarea>
           </div>
-          <div class="form-group mb-0">
-            <input type="submit" value="Leave Comment" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold" />
-          </div>
+          
+          <div class="col-md-4">
+
+            <input type="submit"  class="btn btn-primary mt-2" value="Post">
+<!--                    col finish-->
+          </div>  
+          
         </form>
       </div>
     {% endif %}
@@ -160,4 +198,64 @@
     </div>
   </div>
   <!-- end more products -->
+
+
+
+
+  
+<style>
+
+  .checked {
+    color: orange;
+  }
+    .rating {
+    margin-top: 40px;
+    border: none;
+    float: left;
+  
+  }
+  
+  .rating > label {
+     color: #9C9C9C;
+    font-size: 7px;
+    float:right;
+  }
+  
+  
+  .rating > label:before {
+    margin: 5px;
+    font-size: 2em;
+    font-family: FontAwesome;
+    content: "\f005";
+    display: inline-block;
+  }
+  
+  .rating > input {
+    display: none;
+  }
+  
+  .rating > input:checked ~ label,
+  .rating:not(:checked) > label:hover,
+  .rating:not(:checked) > label:hover ~ label {
+    color: #F79426;
+  }
+  
+  .rating > input:checked + label:hover,
+  .rating > input:checked ~ label:hover,
+  .rating > label:hover ~ input:checked ~ label,
+  .rating > input:checked ~ label:hover ~ label {
+    color: #FECE31;
+  }
+  
+  
+  #star{
+  font-size: 10px;
+  color:grey;
+  }
+  
+  #check-star{
+  font-size: 10px;
+  }
+  
+  </style>
 {% endblock %}
