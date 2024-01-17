@@ -1,11 +1,14 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
-from django.views.generic import ListView, DetailView
-from .models import Product, Category
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect
+from django.views.generic import ListView, DetailView, CreateView
+from .models import Product, Category, Comment
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
 from django.db.models import Count
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import CommentForm
 
 
 
@@ -27,7 +30,7 @@ def category(request, pk=None):
 
 
 class ProductDetail(DetailView):
-    model = Product
+    queryset = Product.objects.prefetch_related('comments__user')
     template_name = 'product_detail.html'
     context_object_name = 'product'
 
@@ -38,7 +41,7 @@ class ProductDetail(DetailView):
         related_products = Product.objects.filter(category=product.category).exclude(id=self.kwargs['pk'])[:3]
         context['related_products'] = related_products
 
-        stuff = get_object_or_404(Product, id=self.kwargs['pk'])
+        stuff = get_object_or_404(Product.objects.annotate(likes_count=Count('likes')), id=self.kwargs['pk'])
         total_likes = stuff.total_likes()
         context['total_likes'] = total_likes
         liked = False
@@ -46,6 +49,7 @@ class ProductDetail(DetailView):
             liked = True
         context['liked'] = liked
 
+        context['comment_form'] = CommentForm()
 
         return context
 
@@ -63,3 +67,20 @@ def likeview(request, pk):
         product.likes.add(request.user)
         liked = True
     return HttpResponseRedirect(reverse('product_detail', args=[str(pk)]))
+
+
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    model = Comment
+    form_class = CommentForm
+
+    def form_valid(self, form):
+        
+        obj = form.save(commit=False)
+       
+        obj.user = self.request.user
+        product_id = int(self.kwargs['product_id'])
+        product = get_object_or_404(Product, id=product_id)
+        obj.product = product
+        messages.success(self.request, 'Your comment successfully added')
+
+        return super().form_valid(form)

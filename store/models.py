@@ -65,3 +65,18 @@ class OrderItem(models.Model):
 
 
     
+class Comment(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_comments', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
+    body = models.TextField()
+    rate = models.IntegerField(default=0)
+    id = models.AutoField(primary_key=True)
+
+    datetime_created = models.DateTimeField(auto_now_add=True)
+
+
+    def get_absolute_url(self):
+        return reverse('product_detail', args=[self.product.id])
+
+    def __str__(self) -> str:
+        return f"{self.user}"
