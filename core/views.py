@@ -33,3 +33,9 @@ def contact(request):
     
     
     return render(request, 'contact.html')
+
+
+def search(request):
+    q = request.GET.get('q')
+    products = Product.objects.filter(title__icontains=q)
+    return render(request, 'product_list.html', context={'products': products})

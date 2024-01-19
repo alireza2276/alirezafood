@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     'django.contrib.humanize',
 
+    'jalali_date',
+
     #third party
     "debug_toolbar",
     'crispy_forms',

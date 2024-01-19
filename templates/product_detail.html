@@ -3,6 +3,8 @@
 {% load i18n %}
 {% load persian_template_tags %}
 {% load humanize %}
+{% load jalali_tags %}
+
 
 {% block title %}
   {% trans 'Product Detail' %}
@@ -70,8 +72,8 @@
                   </form>
                 {% endif %}
               {% else %}
-                <small>{% trans 'For like this product you must login First!' %}</small>
-                <a class="btn" href="{% url 'account_login' %}">{% trans 'Login' %}</a>
+                <strong>{% trans 'For like this product you must login First!' %}</strong>
+                <a class="btn btn-primary" href="{% url 'account_login' %}">{% trans 'Login' %}</a>
               {% endif %}
             </div>
             <h4>Share:</h4>
@@ -95,15 +97,20 @@
     </div>
   </div>
   <!-- end single product -->
-  <div class="col-lg-8">
+  <div class="col-lg-14">
     <!-- Comment List -->
     <div class="mb-5">
-      <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">{{ product.comments.count }} Comments</h3>
+      <h3 class="text-uppercase mb-4" style="letter-spacing: 5px;">{{ product.comments.count }} {% trans "Comments" %}</h3>
       {% for comment in product.comments.all %}
         <div class="media mb-4">
-          <img src="img/user.jpg" alt="Image" class="img-fluid rounded-circle mr-3 mt-1" style="width: 45px;" />
+          {% if product.user.image %}
+                                      <img src="{{ product.user.image.url }}" alt="Review Avatar" style="height: 50px; width: 50px;" class="review__avatar" />
+                                    {% else %}
+                                      <img src="{% static 'img/comment-1.jpg' %}" alt="Review Avatar" style="height: 50px; width: 50px;"  class="review__avatar" />
+                                    {% endif %}
+                                    
           <div class="media-body">
-            <h6>{{ comment.user }} <small><i>{{ comment.datetime_created }}</i></small></h6>
+            <h6>{{ comment.user }} <small><i>{{ comment.datetime_created|to_jalali:'%H:%M:%S  %Y/%m/%d'|translate_number }}</i></small></h6>
             <p>{{ comment.body }}</p>
             {% if comment.rate > 0 %}
             <i class="fa fa-star {% if comment.rate  < 1 %} no-checked {% else %} checked {% endif %} " id="check-star"></i>
@@ -119,7 +126,7 @@
            <i class="fa fa-star" id="star"></i>
            <i class="fa fa-star" id="star"></i>
            <i class="fa fa-star" id="star"></i>
-                  &nbsp;<span>No ratings</span>
+                  &nbsp;<span>{% trans "No ratings" %}</span>
 
           <hr>
 
@@ -131,12 +138,12 @@
     <!-- Comment Form -->
     {% if user.is_authenticated %}
       <div  class="col-md-6">
-        <p style="font-weight:600;">Write a review</p>
+        <p style="font-weight:600;">{% trans "Write a comment" %}</p>
         <form method="post" action="{% url 'comment_create' product.id %}">
           {% csrf_token %} <div class="form-group required">
             <div class="form-group required">
               <div class="fa fa-star">
-                <p>Your Rating:</p>
+                <p>{% trans "Your Rating" %}:</p>
                 <input type="radio" id="star5" name="rate" value="5" />
                 <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
                 <input type="radio" id="star4" name="rate" value="4" />
@@ -146,23 +153,30 @@
                 <input type="radio" id="star2" name="rate" value="2" />
                 <label class="star" for="star2" title="Good" aria-hidden="true"></label>
                 <input type="radio" id="star1" name="rate" value="1" />
-                <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
-              </div>
+              <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+            </div>
             </div>
           
           <div class="form-group">
             
-            <textarea name="body"  placeholder="write a review" rows="6" cols="50" id="review-text" required></textarea>
+            <textarea name="body"  placeholder="{% trans "write a review" %}" rows="6" cols="50" id="review-text" required></textarea>
           </div>
           
           <div class="col-md-4">
 
-            <input type="submit"  class="btn btn-primary mt-2" value="Post">
+            <input type="submit"  class="btn btn-primary mt-2" value="{% trans "Send" %}">
 <!--                    col finish-->
           </div>  
           
         </form>
+        
       </div>
+      {% else %}
+       <div class="d-flex justify-content-center">
+        <strong>{% trans "For write a comment uou must be logged in!" %}</strong>
+        
+        <a class="btn btn-primary" href="{% url "account_login" %}">Login</a>
+       </div>
     {% endif %}
   </div>
   <br />
@@ -175,7 +189,6 @@
         <div class="col-lg-8 offset-lg-2 text-center">
           <div class="section-title">
             <h3><span class="orange-text">{% trans 'Products' %}</span> {% trans 'Related' %}</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
           </div>
         </div>
       </div>
@@ -187,10 +200,17 @@
                 <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt="" /></a>
               </div>
               <h3>{{ product.title }}</h3>
-              <p class="product-price">
+              <p class="product-price" style="font-size: 18px;">
                 {{ product.price|intcomma:False|translate_number }}{% trans '$' %}
               </p>
-              <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> {% trans 'Add to Cart' %}</a>
+              <div class="single-product-form">
+                <form action="{% url 'cart_add' product.id %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="quantity" value="1" min="1" max="31" />
+  
+                  <button class="btn btn-danger" type="submit">{% trans 'Add to cart' %}</button>
+                </form>
+              </div>
             </div>
           </div>
         {% endfor %}

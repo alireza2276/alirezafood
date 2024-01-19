@@ -14,5 +14,5 @@ def show_category(request):
     return {'category': category}
 
 def count_likes(request):
-    products = Product.objects.order_by('-likes').exclude(category__title__icontains='نوشیدنی').annotate(likes_count=Count('likes'))[:3]
+    products = Product.objects.order_by('-likes').exclude(category__title__icontains='نوشیدنی').annotate(likes_count=Count('likes'))[:6]
     return {'products': products}

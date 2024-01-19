@@ -1,10 +1,11 @@
 {% load static %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Login</title>
+    <title>{% trans "Login" %}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -19,7 +20,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-6 text-center mb-5">
-            <h2 class="heading-section">Login</h2>
+            <h2 class="heading-section">{% trans "Login" %}</h2>
           </div>
         </div>
         <div class="row justify-content-center">
@@ -28,18 +29,18 @@
               <div class="icon d-flex align-items-center justify-content-center">
                 <span class="fa fa-user-o"></span>
               </div>
-              <h3 class="text-center mb-4">Sign In</h3>
+              <h3 class="text-center mb-4">{% trans "Sign In" %}</h3>
               <form action="#" class="login-form" method="post">
                 {% csrf_token %}
 
                 {{form|crispy}}
                 
                 <div class="form-group">
-                  <button type="submit" class="form-control btn btn-primary rounded submit px-3">Login</button>
+                  <button type="submit" class="form-control btn btn-primary rounded submit px-3">{% trans "Login" %}</button>
                 </div>
                 
               </form>
-              <small>Do you never create account?</small>   <a href="{% url "account_signup" %}">SignUp</a>
+              <small>{% trans "Do you never create account?" %}</small>   <a href="{% url "account_signup" %}">{% trans "SignUp" %}</a>
             </div>
           </div>
         </div>
