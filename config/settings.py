@@ -71,6 +71,8 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 
     'allauth.account.middleware.AccountMiddleware',
+
+    'django_auto_logout.middleware.auto_logout',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -97,6 +99,8 @@ TEMPLATES = [
                 'store.context_processors.cart',
                 'store.context_processors.count_likes',
                 'store.context_processors.show_information',
+
+                'django_auto_logout.context_processors.auto_logout_client',
                 
             ],
         },
@@ -198,3 +202,13 @@ LANGUAGES = (
 LOCALE_PATHS = [
     os.path.join(str(BASE_DIR.joinpath('templates')), 'locale')
 ]
+
+
+
+# logout session 
+from datetime import timedelta
+AUTO_LOGOUT = {
+    'IDLE_TIME': timedelta(hours=2),
+    'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
+    'MESSAGE': 'The session has expired. Please login again to continue.',
+}
