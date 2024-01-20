@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-20 18:24+0330\n"
+"POT-Creation-Date: 2024-01-20 19:54+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\_base.html:57 .\_base.html:152 .\home.html:8
+#: .\_base.html:57 .\_base.html:171 .\home.html:8
 msgid "Home"
 msgstr "خانه"
 
-#: .\_base.html:61 .\home.html:85 .\home.html:131 .\product_detail.html:191
+#: .\_base.html:61 .\home.html:135 .\product_detail.html:191
 #: .\product_list.html:10
 msgid "Products"
 msgstr "محصولات"
@@ -31,38 +31,48 @@ msgstr "محصولات"
 msgid "Categories"
 msgstr "دسته بندی ها"
 
-#: .\_base.html:73 .\_base.html:164
+#: .\_base.html:73 .\_base.html:183
 msgid "Contact"
 msgstr "ارتباط با ما"
 
-#: .\_base.html:81
+#: .\_base.html:87 .\account\logout.html:9 .\account\logout.html:24
 msgid "Logout"
 msgstr "خروج از حساب کاربری"
 
-#: .\_base.html:109 .\_base.html:110
+#: .\_base.html:88 .\account\password_change.html:15
+#: .\account\password_change.html:22
+msgid "Password Change"
+msgstr "تغییر رمز عبور"
+
+#: .\_base.html:95 .\_base.html:100 .\account\signup.html:8
+#: .\account\signup.html:23 .\account\signup.html:38
+msgid "Signup"
+msgstr "ثبت نام"
+
+#: .\_base.html:95 .\_base.html:99 .\account\login.html:8
+#: .\account\login.html:23 .\account\login.html:39 .\product_detail.html:76
+msgid "Login"
+msgstr "ورود"
+
+#: .\_base.html:128 .\_base.html:129
 msgid "Search"
 msgstr "جستجو"
 
-#: .\_base.html:149
+#: .\_base.html:168
 msgid "Pages"
 msgstr "صفحات"
 
-#: .\_base.html:155
+#: .\_base.html:174
 msgid "About"
 msgstr "درباره ما"
 
-#: .\_base.html:158 .\product_list.html:20
+#: .\_base.html:177 .\product_list.html:20
 msgid "products"
 msgstr "محصولات"
 
-#: .\_base.html:161
+#: .\_base.html:180
 msgid "News"
 msgstr "اخبار"
-
-#: .\account\login.html:8 .\account\login.html:23 .\account\login.html:39
-#: .\product_detail.html:76
-msgid "Login"
-msgstr "ورود"
 
 #: .\account\login.html:32
 msgid "Sign In"
@@ -76,6 +86,27 @@ msgstr "آیا تا به حال ثبت نام نکرده اید؟"
 msgid "SignUp"
 msgstr "ثبت نام"
 
+#: .\account\logout.html:33
+msgid "Are you sure to log out of this page?"
+msgstr "آیا مطمعن هستید که میخواهید از سایت خارج شوید؟"
+
+#: .\account\logout.html:39
+msgid "Yes I`m Sure"
+msgstr "بله من مطمعن هستم"
+
+#: .\account\logout.html:42
+msgid "No!I`m Back"
+msgstr "خیر. برمیگردم"
+
+#: .\account\password_change.html:45
+msgid "Save Password"
+msgstr "ذخیره رمز عبور"
+
+#: .\account\password_change.html:50 .\contact.html:58
+#: .\product_detail.html:167
+msgid "Send"
+msgstr "ارسال"
+
 #: .\cart_detail.html:9 .\cart_detail.html:19
 msgid "Cart"
 msgstr "سبد خرید"
@@ -84,9 +115,9 @@ msgstr "سبد خرید"
 msgid "Product Image"
 msgstr "عکس محصول"
 
-#: .\cart_detail.html:45
+#: .\cart_detail.html:45 .\contact.html:46
 msgid "Name"
-msgstr "عنوان محصول"
+msgstr "عنوان"
 
 #: .\cart_detail.html:46 .\cart_detail.html:90 .\order_create.html:101
 msgid "Price"
@@ -101,10 +132,10 @@ msgstr "تعداد"
 msgid "Total"
 msgstr "مجموع"
 
-#: .\cart_detail.html:61 .\home.html:100 .\home.html:101 .\home.html:104
-#: .\home.html:146 .\home.html:147 .\home.html:150 .\order_create.html:114
-#: .\product_detail.html:48 .\product_detail.html:204 .\product_list.html:51
-#: .\product_list.html:52 .\product_list.html:55
+#: .\cart_detail.html:61 .\home.html:102 .\home.html:103 .\home.html:106
+#: .\home.html:151 .\home.html:152 .\home.html:155 .\order_create.html:114
+#: .\product_detail.html:48 .\product_detail.html:204 .\product_list.html:58
+#: .\product_list.html:59 .\product_list.html:62
 msgid "$"
 msgstr "تومان"
 
@@ -140,25 +171,65 @@ msgstr "ارتباط با ما"
 msgid "Contact us"
 msgstr "ارتباط با ما"
 
+#: .\contact.html:38
+msgid "Have you any question?"
+msgstr "آیا سوالی از ما دارید؟"
+
+#: .\contact.html:39
+msgid "Fill form of the below and send to us"
+msgstr "فرم زیر را پر کرده و برای ما ارسال کنید"
+
+#: .\contact.html:47
+
+msgid "Email"
+msgstr "ایمیل"
+
+#: .\contact.html:50 .\contact.html:80
+msgid "Phone"
+msgstr "تلفن"
+
+#: .\contact.html:51
+msgid "Subject"
+msgstr "موضوع"
+
+#: .\contact.html:54
+msgid "Message"
+msgstr "متن"
+
+#: .\contact.html:66
+msgid "Address"
+msgstr "آدرس"
+
+#: .\contact.html:72
+msgid "time working"
+msgstr "ساعت کاری"
+
+#: .\contact.html:78
+msgid " Contact"
+msgstr "راه ارتباط"
+
+#: .\contact.html:80
+msgid "email"
+msgstr "ایمیل"
+
 #: .\home.html:20
 msgid "Alirezafood is the best choice for you"
 msgstr "بهترین انتخاب برای شما alirezafoodاست"
 
 #: .\home.html:85
-
 msgid "Fantastic Price"
 msgstr "تخفیف های شگفت انگیز"
 
-#: .\home.html:102 .\home.html:148 .\product_list.html:53
+#: .\home.html:104 .\home.html:153 .\product_list.html:60
 msgid "discount"
 msgstr "تخفیف"
 
-#: .\home.html:112 .\home.html:158 .\product_detail.html:56
-#: .\product_detail.html:211 .\product_list.html:63
+#: .\home.html:114 .\home.html:163 .\product_detail.html:56
+#: .\product_detail.html:211 .\product_list.html:70
 msgid "Add to cart"
 msgstr "اضافه به سبد خرید"
 
-#: .\home.html:131
+#: .\home.html:135
 msgid "Popular"
 msgstr "پرطرفدار"
 
@@ -218,10 +289,6 @@ msgstr "امتیار شما"
 msgid "write a review"
 msgstr "نظر خود را بنویسید"
 
-#: .\product_detail.html:167
-msgid "Send"
-msgstr "ارسال"
-
 #: .\product_detail.html:176
 msgid "For write a comment uou must be logged in!"
 msgstr "برای نوشتن نظر خود ابتدا باید واردشوید!"
@@ -230,11 +297,11 @@ msgstr "برای نوشتن نظر خود ابتدا باید واردشوید!"
 msgid "Related"
 msgstr "مشابه"
 
-#: .\product_list.html:78
+#: .\product_list.html:85
 msgid "Previous"
 msgstr "قبلی"
 
-#: .\product_list.html:95
+#: .\product_list.html:102
 msgid "Next"
 msgstr "بعدی"
 

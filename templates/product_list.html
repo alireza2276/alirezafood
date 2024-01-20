@@ -23,6 +23,13 @@
       </div>
     </div>
   </div>
+  {% if messages %}
+  <div class="container">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
   <!-- end breadcrumb section -->
   <!-- products -->
   <div class="product-section mt-150 mb-150">

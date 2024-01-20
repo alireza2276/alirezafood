@@ -1,6 +1,7 @@
 from .models import Category, Category, Product
 from cart.cart import Cart
 from django.db.models import Count
+from core.models import Information
 
 
 
@@ -18,3 +19,7 @@ def count_likes(request):
     percentages = Product.objects.order_by('-likes').exclude(category__title__icontains='نوشیدنی').annotate(likes_count=Count('likes')).all()
 
     return {'products': products, 'percentages': percentages}
+
+def show_information(request):
+    information = Information.objects.all().last()
+    return {'information': information}

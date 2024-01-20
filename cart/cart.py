@@ -3,6 +3,7 @@ from django.contrib import messages
 from coupons.models import Coupon
 from decimal import Decimal
 from coupons.forms import CouponApplyForm
+from django.utils.translation import gettext_lazy as _
 
 
 
@@ -26,7 +27,7 @@ class Cart:
         else:
             self.cart[product_id]['quantity'] += quantity
         
-        messages.success(self.request, 'Product successfully added')
+        messages.success(self.request, _('Product successfully added'))
 
         self.save()
 
@@ -36,7 +37,7 @@ class Cart:
         if product_id in self.cart:
             del self.cart[product_id]
 
-        messages.success(self.request, 'Product successfully removed from cart')
+        messages.success(self.request, _('Product successfully removed from cart'))
         self.save()
 
     

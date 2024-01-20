@@ -96,6 +96,7 @@ TEMPLATES = [
                 'store.context_processors.show_category',
                 'store.context_processors.cart',
                 'store.context_processors.count_likes',
+                'store.context_processors.show_information',
                 
             ],
         },

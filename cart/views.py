@@ -5,6 +5,9 @@ from .forms import AddToCartProductForm, OrderForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from coupons.forms import CouponApplyForm
+from django.utils.translation import gettext_lazy as _
+
+
 
 def cart_detail_view(request):
     cart = Cart(request)
@@ -47,10 +50,10 @@ def cart_clear(request):
 
     if len(cart):
         cart.clear()
-        messages.success(request, 'Your cart successfully removed from your cart')
+        messages.success(request, _('Your cart successfully removed from your cart'))
 
     else:
-        messages.warning(request, 'Your cart is empty')
+        messages.warning(request, _('Your cart is empty'))
 
     return redirect('product_list')
 
@@ -59,8 +62,8 @@ def order_create(request):
     order_form = OrderForm()
     cart = Cart(request)
 
-    if len(cart) == 0:
-        messages.warning(request, 'You can not proceed, because your cart is empty!')
+    if not cart:
+        messages.warning(request, _('You can not proceed, because your cart is empty!'))
         return redirect('product_list')
     if request.method == 'POST':
 
@@ -82,7 +85,7 @@ def order_create(request):
             
         cart.clear()
 
-        messages.success(request, 'Your orders has successfully placed.')
+        messages.success(request, _('Your orders has successfully placed.'))
 
 
     return render(request, 'order_create.html', context={
