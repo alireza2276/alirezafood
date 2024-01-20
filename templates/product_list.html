@@ -47,7 +47,14 @@
                 <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt="" /></a>
               </div>
               <h3>{{ product.title }}</h3>
-              <p class="product-price">{{ product.price|intcomma:False|translate_number }}{% trans "$" %}</p>
+              {% if product.discount %}
+              <p style="font-size: 18px; text-decoration:line-through" class="product-price">{{ product.price|intcomma:False|translate_number }}{% trans "$" %}</p>
+              <p style="font-size: 18px; " class="product-price">{{ product.discount|intcomma:False|translate_number }}{% trans "$" %}</p>
+              <p>{{product.price_percentage|translate_number}}% {% trans "discount" %}</p>
+              {% else %}
+              <p style="font-size: 18px;" class="product-price">{{ product.price|intcomma:False|translate_number }}{% trans "$" %}</p>
+              
+              {% endif %}
               <div class="single-product-form">
                 <form action="{% url 'cart_add' product.id %}" method="post">
                   {% csrf_token %}

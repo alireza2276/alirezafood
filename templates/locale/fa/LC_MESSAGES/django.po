@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-19 17:54+0330\n"
+"POT-Creation-Date: 2024-01-20 18:24+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\_base.html:57 .\_base.html:150 .\home.html:8
+#: .\_base.html:57 .\_base.html:152 .\home.html:8
 msgid "Home"
 msgstr "خانه"
 
-#: .\_base.html:61 .\home.html:85 .\product_detail.html:191
+#: .\_base.html:61 .\home.html:85 .\home.html:131 .\product_detail.html:191
 #: .\product_list.html:10
 msgid "Products"
 msgstr "محصولات"
@@ -31,7 +31,7 @@ msgstr "محصولات"
 msgid "Categories"
 msgstr "دسته بندی ها"
 
-#: .\_base.html:73 .\_base.html:162
+#: .\_base.html:73 .\_base.html:164
 msgid "Contact"
 msgstr "ارتباط با ما"
 
@@ -39,40 +39,40 @@ msgstr "ارتباط با ما"
 msgid "Logout"
 msgstr "خروج از حساب کاربری"
 
-#: .\_base.html:109
+#: .\_base.html:109 .\_base.html:110
 msgid "Search"
 msgstr "جستجو"
 
-#: .\_base.html:147
+#: .\_base.html:149
 msgid "Pages"
 msgstr "صفحات"
 
-#: .\_base.html:153
+#: .\_base.html:155
 msgid "About"
 msgstr "درباره ما"
 
-#: .\_base.html:156 .\product_list.html:20
+#: .\_base.html:158 .\product_list.html:20
 msgid "products"
 msgstr "محصولات"
 
-#: .\_base.html:159
+#: .\_base.html:161
 msgid "News"
 msgstr "اخبار"
 
-#: .\account\login.html:7 .\account\login.html:22 .\account\login.html:38
+#: .\account\login.html:8 .\account\login.html:23 .\account\login.html:39
 #: .\product_detail.html:76
 msgid "Login"
 msgstr "ورود"
 
-#: .\account\login.html:31
+#: .\account\login.html:32
 msgid "Sign In"
 msgstr "ورود"
 
-#: .\account\login.html:42
+#: .\account\login.html:43
 msgid "Do you never create account?"
 msgstr "آیا تا به حال ثبت نام نکرده اید؟"
 
-#: .\account\login.html:42
+#: .\account\login.html:43
 msgid "SignUp"
 msgstr "ثبت نام"
 
@@ -101,8 +101,10 @@ msgstr "تعداد"
 msgid "Total"
 msgstr "مجموع"
 
-#: .\cart_detail.html:61 .\home.html:99 .\order_create.html:114
-#: .\product_detail.html:48 .\product_detail.html:204 .\product_list.html:50
+#: .\cart_detail.html:61 .\home.html:100 .\home.html:101 .\home.html:104
+#: .\home.html:146 .\home.html:147 .\home.html:150 .\order_create.html:114
+#: .\product_detail.html:48 .\product_detail.html:204 .\product_list.html:51
+#: .\product_list.html:52 .\product_list.html:55
 msgid "$"
 msgstr "تومان"
 
@@ -143,12 +145,22 @@ msgid "Alirezafood is the best choice for you"
 msgstr "بهترین انتخاب برای شما alirezafoodاست"
 
 #: .\home.html:85
+
+msgid "Fantastic Price"
+msgstr "تخفیف های شگفت انگیز"
+
+#: .\home.html:102 .\home.html:148 .\product_list.html:53
+msgid "discount"
+msgstr "تخفیف"
+
+#: .\home.html:112 .\home.html:158 .\product_detail.html:56
+#: .\product_detail.html:211 .\product_list.html:63
+msgid "Add to cart"
+msgstr "اضافه به سبد خرید"
+
+#: .\home.html:131
 msgid "Popular"
 msgstr "پرطرفدار"
-
-#: .\home.html:100
-msgid "Add to Cart"
-msgstr "اضافه کردن به سبد خرید"
 
 #: .\order_create.html:10 .\order_create.html:20
 msgid "Check Out"
@@ -177,10 +189,6 @@ msgstr "جزئیات محصول"
 #: .\product_detail.html:20
 msgid "Single Product"
 msgstr "تک محصول"
-
-#: .\product_detail.html:56 .\product_detail.html:211 .\product_list.html:56
-msgid "Add to cart"
-msgstr "اضافه به سبد خرید"
 
 #: .\product_detail.html:65 .\product_detail.html:71
 msgid "Likes"
@@ -222,10 +230,13 @@ msgstr "برای نوشتن نظر خود ابتدا باید واردشوید!"
 msgid "Related"
 msgstr "مشابه"
 
-#: .\product_list.html:71
+#: .\product_list.html:78
 msgid "Previous"
 msgstr "قبلی"
 
-#: .\product_list.html:88
+#: .\product_list.html:95
 msgid "Next"
 msgstr "بعدی"
+
+#~ msgid "Add to Cart"
+#~ msgstr "اضافه کردن به سبد خرید"

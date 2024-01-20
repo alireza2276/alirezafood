@@ -15,4 +15,6 @@ def show_category(request):
 
 def count_likes(request):
     products = Product.objects.order_by('-likes').exclude(category__title__icontains='نوشیدنی').annotate(likes_count=Count('likes'))[:6]
-    return {'products': products}
+    percentages = Product.objects.order_by('-likes').exclude(category__title__icontains='نوشیدنی').annotate(likes_count=Count('likes')).all()
+
+    return {'products': products, 'percentages': percentages}
